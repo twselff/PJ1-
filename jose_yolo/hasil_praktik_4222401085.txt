@@ -1,0 +1,60 @@
+========================================================================
+Hasil Praktik Pj1 — Smart Locker Face ID
+========================================================================
+NIM / Nama : 4222401085 / Jose Manuel Sinurat
+Dataset    : dataset_v1 (Jose, Rizky, Dafa — 3 kelas, 240 gambar, 2 sesi)
+Model      : YOLO26n | Device: CPU AMD Ryzen 3 7320U
+
+--- Tabel Eksperimen ---
+
+Eksperimen        Perubahan     mAP50     mAP50-95    P         R         ms        menit  
+------------------------------------------------------------------------
+E1_pretrained     -             0.968     0.661       0.935     0.972     54.1      141    
+E2_scratch        bobot acak    0.931     0.508       0.884     0.829     46.3      237    
+E3_imgsz416       imgsz=416     0.971     0.691       0.912     0.958     35.8      41     
+
+Model terpilih (mAP50-95 val tertinggi): E3_imgsz416
+
+--- Hasil di Data TEST (sekali saja) ---
+
+  all   P=0.948  R=0.952  mAP50=0.953  mAP50-95=0.714  23.9ms/img  ~42 FPS
+  Jose   P=0.962  R=1.0  mAP50=0.995  mAP50-95=0.759
+  Rizky  P=0.955  R=1.0  mAP50=0.995  mAP50-95=0.863
+  Dafa   P=0.928  R=0.857  mAP50=0.869  mAP50-95=0.521
+
+--- Analisis Singkat ---
+
+E1 vs E2 (Transfer Learning):
+  E1 pretrained mAP50-95=0.661, E2 scratch mAP50-95=0.508.
+  Selisih 0.153 poin — transfer learning membantu dengan data terbatas.
+  E2 juga butuh waktu 237 menit vs 141 menit.
+
+E1 vs E3 (imgsz 640→416):
+  mAP50-95 meningkat 0.661→0.691, training 141→41 menit,
+  inferensi 54.1→35.8 ms. Wajah di frame 1080p cukup besar untuk 416px.
+
+Model Terpilih: E3_imgsz416
+  Dipilih berdasarkan mAP50-95 val tertinggi (0.691).
+
+Hasil di Data Test:
+  mAP50-95 test 0.714 > val 0.691 — tidak overfitting.
+  ~42 FPS melampaui target desain ≥10 FPS.
+  Dafa mAP50-95 terendah (0.521) — variasi jarak kurang.
+
+--- Perbandingan dengan Target Desain ---
+
+  mAP50-95    : ≥0.6     → 0.714  ✓
+  FPS         : ≥10      → ~42    ✓
+  Latensi     : ≤500 ms  → 23.9ms ✓
+  Akurasi/kls : ≥90%     → Jose 99.5%, Rizky 99.5%, Dafa 86.9%  ⚠
+  FAR         : ≤5%      → belum diukur  ⚠
+
+--- Keterbatasan ---
+
+  - Data dari 2 sesi dengan kondisi serupa, angka mungkin optimistis.
+  - FAR belum diukur karena tidak ada data wajah orang lain.
+  - Dataset kecil (80 gambar/kelas) membuat angka per kelas sensitif.
+
+========================================================================
+Program Studi Teknologi Rekayasa Robotika · Politeknik Negeri Batam
+========================================================================

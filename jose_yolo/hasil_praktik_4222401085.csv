@@ -1,0 +1,16 @@
+NIM / Nama,4222401085 / Jose Manuel Sinurat
+Dataset,dataset_v1
+
+Eksperimen,Perubahan,mAP50,mAP50-95,P,R,ms,menit
+E1_pretrained,-,0.968,0.661,0.935,0.972,54.1,141
+E2_scratch,bobot acak,0.931,0.508,0.884,0.829,46.3,237
+E3_imgsz416,imgsz=416,0.971,0.691,0.912,0.958,35.8,41
+
+Model terpilih (mAP50-95 val tertinggi):,E3_imgsz416
+
+=== HASIL DATA TEST ===
+Kelas,P,R,mAP50,mAP50-95,ms/img
+all,0.948,0.952,0.953,0.714,23.9
+Jose,0.962,1.0,0.995,0.759
+Rizky,0.955,1.0,0.995,0.863
+Dafa,0.928,0.857,0.869,0.521

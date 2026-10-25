@@ -1,0 +1,7 @@
+path: dataset_v1
+train: train/images
+val: val/images
+test: test/images
+
+nc: 3
+names: ['Jose', 'Rizky', 'Dafa']
